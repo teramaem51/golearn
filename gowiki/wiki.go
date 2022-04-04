@@ -38,9 +38,9 @@ func loadPage(title string) (*Page, error) {
 func viewHandler(w http.ResponseWriter, r *http.Request, title string) {
 	p, err := loadPage(title)
 	if err != nil {
-		p = &Page{Title: title}
+		http.Redirect(w, r, "/edit/"+title, http.StatusFound)
 	}
-	renderTemplate(w, "edit", p)
+	renderTemplate(w, "view", p)
 }
 
 func editHandler(w http.ResponseWriter, r *http.Request, title string) {
